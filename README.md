@@ -15,4 +15,4 @@
 ## 赞助
 > 如果有所收获，请微信意思意思
 
-![image]([./img/donate/weixin.jpg](https://github.com/TicooLiu/HowTo-ASR/blob/main/img/donate/weixin.jpeg))
+![image](https://github.com/TicooLiu/HowTo-ASR/blob/main/img/donate/weixin.jpeg)
