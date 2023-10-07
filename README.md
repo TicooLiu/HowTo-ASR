@@ -10,7 +10,10 @@
  
  > 项目地址:https://github.com/wenet-e2e/wekws
  
- 
+ ### 1.2 wekws不同数据集指南
+  > [Hey Snips数据集](https://github.com/TicooLiu/HowTo-ASR/blob/main/wekws/wekws-heysnips-train-guide.md)
+
+  > [Speech Command数据集](https://github.com/TicooLiu/HowTo-ASR/blob/main/wekws/wekws-speech-command-train-guide.md)
 
 ## 赞助
 > 如果有所收获，请微信意思意思

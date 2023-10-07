@@ -35,7 +35,7 @@ conda install pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=11.1 -c pytorch -c co
 ```
 
 ### 0.5 FFMPEG
-在使用`bash`脚本划分自定义数据集时，需要获取每个音频文件的时长`duration`信息，此过程使用FFMPEG软件库功能，需要在Ubuntu环境下安装该软件库，如自己填写数据集文件，可不需此软件库。如自己写`python`脚本程序划分数据集，也可使用上述安装的`torchaudio`库，也不需安装FFMPEG。
+在使用`bash`脚本划分自定义数据集时，需要获取每个音频文件的时长`duration`信息，此过程使用FFMPEG软件库功能，需要在`Ubuntu`环境下安装该软件库，如自己填写数据集文件，可不需此软件库。如自己写`python`脚本程序划分数据集，也可使用上述安装的`torchaudio`库，也不需安装FFMPEG。
 ```
 sudo apt install ffmpeg
 ```
@@ -78,9 +78,17 @@ sudo apt install ffmpeg
  
  
 ## 2. 脚本流程
- > `wekws`源码`examples/hey_snips/s0/run.sh`
+ > `wekws`源码`examples/hey_snips/s0/run.sh`。`run.sh`脚本的执行是分为多个独立的执行阶段来运行的，通过指定脚本执行参数可以控制脚本跨越的运行阶段，这样可以更好的独立调试每个运行阶段。也可以通过参数控制脚本执行所有的阶段(默认行为)。
+ 
+ ### 脚本参数示例：
+ - `bash run.sh --stage 0 --stop-stage 0`
+   + 仅执行第0阶段的操作，执行完该阶段操作，立即结束。
+ - `bash run.sh --stage 1 --stop-stage 4`
+   + 执行第1阶段至第4阶段的操作，脚本顺序执行1，2，3，4四个阶段的操作，除非出现操作错误或人为中断，则脚本会执行到第4阶段的操作完成，然后立即结束。
 
+ ### 脚本流程说明
   ```
+  run.sh
   |  # --stage -1
   |  # 下载英文语音数据集hey_snips_kws_4.0.tar.gz
   |  # 解压hey_snips_kws_4.0.tar.gz至参数指定的目录:./data/local
