@@ -34,10 +34,16 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 conda install pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=11.1 -c pytorch -c conda-forge
 ```
 
+### 0.5 FFMPEG
+在使用`bash`脚本划分自定义数据集时，需要获取每个音频文件的时长`duration`信息，此过程使用FFMPEG软件库功能，需要在Ubuntu环境下安装该软件库，如自己填写数据集文件，可不需此软件库。如自己写`python`脚本程序划分数据集，也可使用上述安装的`torchaudio`库，也不需安装FFMPEG。
+```
+sudo apt install ffmpeg
+```
+
 ## 1 hey_snips数据集目录结构
 > **注意:**
 > 由于`hey snips`数据集无法公开下载，此处的数据集目录结构，以及划分数据集的`json`格式均是
-> 参考``项目说明以及`wekws`示例源码得到。
+> 参考`https://github.com/sonos/keyword-spotting-research-datasets.git`项目说明以及`wekws`示例源码得到。
 
  ### 1.1 数据集目录结构
  ```
@@ -147,7 +153,7 @@ conda install pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=11.1 -c pytorch -c co
  > 自定义`command.txt`放在`./data/local/`下,
  > 与`hey_snips_research_6k_en_train_eval_clean_ter`
  > 同级，以供训练脚本使用。`command.txt`内容格式为每行一条命令词。
- 
+
  **注意:** `command.txt`可用使用脚本遍历上述自定义的数据目录，截取`<指令>`部分自动生成，这样可以较好的保存与代码的一致性，避免出现指令变动时，数据表示不一致。
 
 
@@ -240,3 +246,10 @@ conda install pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=11.1 -c pytorch -c co
   > endif()
   > ```
 
+## 5 结语
+通过Android录音软件，根据自定义的`command.txt`约20条指令，收集了约4人的20轮次的无噪音朗读语音，训练出模型后，训练报告识别精度达到0.93，实际在Android设备部署测试，无噪音环境下，感觉基本识别精度达到0.7的样子，如大量增加训练数据，理论上在无噪音环境下应该可达到训练精度。仍需尝试给数据集加噪，测试随机噪音环境下的识别精度
+
+**赞助**
+> 如果有所收获，请微信意思意思
+
+![image](https://github.com/TicooLiu/HowTo-ASR/blob/main/img/donate/weixin.jpeg)
