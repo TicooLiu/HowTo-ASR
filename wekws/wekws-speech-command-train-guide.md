@@ -1,7 +1,9 @@
 # wekws: wenet keyword spotting
 > 项目地址:https://github.com/wenet-e2e/wekws.git
 
-> 本篇内容为基于`google speech command`数据集进行训练的操作步骤，均为本人实践记录。
+> 本篇内容为基于`google speech command`数据集进行训练的操作步骤，均为本人实践记
+> 录。在此基础上，自己按照`google speech command`数据集格式准备好自己录制的指令音频
+> 即可完全训练自己的用于语音识别的指令集。
 
 ## 0. 环境准备
  - 架构：`12th Gen Intel(R) Core(TM) i9-12900H 2.50 GHz`
@@ -178,7 +180,7 @@ speech_commands_v0.02/  ## 或者speech_commands_v0.01
   > 浏览器打开上述链接,进入TensorBoard页面查看
   
   > 5. 模型导出问题：
-  > 训练完成后，在使用run.sh脚本导出模型时，run.sh脚本默认导出两种模型：1. jit的zip格式的模型文件 2. onnx格式的模型文件。导出jit的zip格式模型文件正常，导出onnx格式的模型文件时报告错误。其错误原因为mdtc.yaml的配置文件中没有num_layers参数，而python脚本中却使用了该参数。经过在项目issue中提问，回复说mdtc.yaml配置文件对应的参数为num_stack，需要修改python脚本`wekws/bin/export_onnx.py`，重新导出。[参见项目#issue148](https://github.com/wenet-e2e/wekws/issues/148)。导出脚本修改`main()`中的下列代码：
+  > 训练完成后，在使用run.sh脚本导出模型时，run.sh脚本默认导出两种模型：1. jit的zip格式的模型文件 2. onnx格式的模型文件。导出jit的zip格式模型文件正常，导出onnx格式的模型文件时报告错误。其错误原因为`mdtc.yaml`的配置文件中没有`num_layers`参数，而python脚本中却使用了该参数。经过在wekws项目issue中提问，回复说`mdtc.yaml`配置文件对应的参数为`num_stack`，需要修改python脚本`wekws/bin/export_onnx.py`，重新导出。[参见wekws项目#issue148](https://github.com/wenet-e2e/wekws/issues/148)。导出脚本修改`main()`中的下列代码：
   >```python
   >  is_fsmn = configs['model']['backbone']['type'] == 'fsmn'
   >  is_mdtc = configs['model']['backbone']['type'] == 'mdtc'
