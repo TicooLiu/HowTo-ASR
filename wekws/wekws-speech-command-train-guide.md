@@ -31,12 +31,6 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 conda install pytorch=1.10.0 torchaudio=0.10.0 cudatoolkit=11.1 -c pytorch -c conda-forge
 ```
 
-### 0.5 FFMPEG
-在使用`bash`脚本划分自定义数据集时，需要获取每个音频文件的时长`duration`信息，此过程使用FFMPEG软件库功能，需要在`Ubuntu`环境下安装该软件库，如自己填写数据集文件，可不需此软件库。如自己写`python`脚本程序划分数据集，也可使用上述安装的`torchaudio`库，也不需安装FFMPEG。
-```
-sudo apt install ffmpeg
-```
-
 ## 1. 数据集目录结构
  ### 1.1 speech_commands数据集
  Speech Command数据集已经发布了两个版本，数据集目录结构没有变化，只是适当的增删了音频数据。选择哪个版本都可以使用。
@@ -148,10 +142,36 @@ speech_commands_v0.02/  ## 或者speech_commands_v0.01
   ### 3.3 准备命令词
   准备自定义的命令词文件`command.txt`，该文件内容为每行一条命令词。复制`command.txt`至`wekws/examples/speechcommand_v1/s0/data/local/`目录下，与`speech_commands_v1`目录同级。
 
+### 3.4 训练模型
+> 1. 逐阶段训练
+> ```
+> # stage -1
+> bash run.sh --stage -1 --stop-stage -1
+> # stage 0
+> bash run.sh --stage 0 --stop-stage 0
+> # stage 1
+> bash run.sh --stage 1 --stop-stage 1
+> # stage 2
+> bash run.sh --stage 2 --stop-stage 2
+> # stage 3
+> bash run.sh --stage 3 --stop-stage 3
+> # stage 4
+> bash run.sh --stage 4 --stop-stage 4
+> ```
+
+> 2. 全阶段训练
+> ```
+> # stage all
+> bash run.sh --stage -1 --stop-stage -4
+> ```
+
+> 3. 选择性训练
+> ```
+> # stage 1 to 3
+> bash run.sh --stage 1 --stop-stage 3
+> ```
 
   ## 4 注意事项
-  
-  > 0. 准备command.txt文件，每行为一条命令，放在data/local/目录下
   
   > 1. 如果训练时，内存不足，修改`conf/mdtc.yaml`中的`batch_size`
   > ```

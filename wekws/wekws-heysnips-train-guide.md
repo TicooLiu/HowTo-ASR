@@ -1,4 +1,6 @@
-# wekws: wenet keyword spotting
+
+[English](https://github.com/TicooLiu/HowTo-ASR/blob/main/wekws/wekws-heysnips-train-guide_en.md)
+# wekws: wenet 关键词唤醒(keyword spotting)
 > 项目地址:https://github.com/wenet-e2e/wekws.git
 
 > 本篇内容为基于`hey snips`数据集格式进行自定义多唤醒词训练的操作步骤，均为本人实践记录。
@@ -209,8 +211,35 @@ sudo apt install ffmpeg
  >            label.append(keyword_id)
  > ```
   
-  
-  
+### 3.5 训练模型
+> 1. 逐阶段训练
+> ```
+> # stage -1
+> bash run.sh --stage -1 --stop-stage -1
+> # stage 0
+> bash run.sh --stage 0 --stop-stage 0
+> # stage 1
+> bash run.sh --stage 1 --stop-stage 1
+> # stage 2
+> bash run.sh --stage 2 --stop-stage 2
+> # stage 3
+> bash run.sh --stage 3 --stop-stage 3
+> # stage 4
+> bash run.sh --stage 4 --stop-stage 4
+> ```
+
+> 2. 全阶段训练
+> ```
+> # stage all
+> bash run.sh --stage -1 --stop-stage -4
+> ```
+
+> 3. 选择性训练
+> ```
+> # stage 1 to 3
+> bash run.sh --stage 1 --stop-stage 3
+> ```
+
 ## 4 注意事项
   
   > 1. 如果训练时，内存不足，修改`conf/mdtc.yaml`中的`batch_size`
@@ -257,7 +286,7 @@ sudo apt install ffmpeg
   > ```
 
 ## 5 结语
-通过Android录音软件，根据自定义的`command.txt`约20条指令，收集了约4人的20轮次的无噪音朗读语音，训练出模型后，训练报告识别精度达到0.93，实际在Android设备部署测试，无噪音环境下，感觉基本识别精度达到0.7的样子，如大量增加训练数据，理论上在无噪音环境下应该可达到训练精度。仍需尝试给数据集加噪，测试随机噪音环境下的识别精度
+通过Android录音软件，根据自定义的`command.txt`约70条指令，收集了约4人的20轮次的无噪音朗读语音，训练出模型后，训练报告识别精度达到0.93，实际在Android设备部署测试，无噪音环境下，感觉基本识别精度达到0.7的样子，如大量增加训练数据，理论上在无噪音环境下应该可达到训练精度。仍需尝试给数据集加噪，测试随机噪音环境下的识别精度
 
 **赞助**
 > 如果有所收获，请微信意思意思

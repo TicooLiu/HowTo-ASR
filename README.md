@@ -5,8 +5,7 @@
 
 ## [1. HowTo:wekws](./wekws/wekws.md)
  ### 1.1 wekws介绍
- wekws是由wenet开源的一个语言关键词唤醒的开源项目
- 主要实现关键词唤醒功能。
+ wekws是由wenet开源的一个语音关键词唤醒的开源项目,主要实现通过语音关键词进行唤醒功能。
  
  > 项目地址:https://github.com/wenet-e2e/wekws
  

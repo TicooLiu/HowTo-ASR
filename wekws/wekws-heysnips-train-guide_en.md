@@ -91,15 +91,18 @@ sudo apt install ffmpeg
  
  
 ## 2. Flowchart of script
- > `wekws` source code: `examples/hey_snips/s0/run.sh`.`run.sh` script is split to many stage to run, these stages can be run independently via parameters to control，This design is very good to test per stage independently. The script's default behavor is to run all stage.
+ > `wekws` source code: `examples/hey_snips/s0/run.sh`.`run.sh` script is split to many 
+ > stage to run, these stages can be run independently via parameters to control，This 
+ > design is very good to test per stage independently. The script's default behavor is 
+ > to run all stage.
  
- ### Parameter of scritp example:
+ ### 2.1 Parameter of scritp example:
  - `bash run.sh --stage 0 --stop-stage 0`
    + Only do work of stage 0.
  - `bash run.sh --stage 1 --stop-stage 4`
    + Do work from stage 1 to 4 one by one.
 
- ### Flowchart explaination
+ ### 2.2 Flowchart explaination
   ```
   run.sh
   |  # --stage -1
@@ -220,7 +223,34 @@ After run split script, generated `json` files have two more fields than normal 
  >            label.append(keyword_id)
  > ```
   
-  
+### 3.5 Train model
+> 1. Stage one by one
+> ```
+> # stage -1
+> bash run.sh --stage -1 --stop-stage -1
+> # stage 0
+> bash run.sh --stage 0 --stop-stage 0
+> # stage 1
+> bash run.sh --stage 1 --stop-stage 1
+> # stage 2
+> bash run.sh --stage 2 --stop-stage 2
+> # stage 3
+> bash run.sh --stage 3 --stop-stage 3
+> # stage 4
+> bash run.sh --stage 4 --stop-stage 4
+> ```
+
+> 2. Stage all
+> ```
+> # stage all
+> bash run.sh --stage -1 --stop-stage -4
+> ```
+
+> 3. Stage selection
+> ```
+> # stage 1 to 3
+> bash run.sh --stage 1 --stop-stage 3
+> ```
   
 ## 4 Matters needing attention
   
@@ -269,9 +299,9 @@ After run split script, generated `json` files have two more fields than normal 
   > ```
 
 ## 5 Concluding remarks
-We obtain voice about 4 person with 20 loop per keyword via Android APP, and defined about 60 keywords. After finish trainning, we test model with test dataset get about Acc 0.93. We deploy into Android device to test in without noise environment, human feeling about Acc 0.7. If add more data and noise data to train, it maybe get more better.
+We obtain voice about 4 person with 20 loop per keyword via Android APP, and defined about 70 keywords. After finish trainning, we test model with test dataset get about Acc 0.93. We deploy into Android device to test in without noise environment, human feeling about Acc 0.7. If add more data and noise data to train, it maybe get more better.
 
 **DONATE**
-> If feel helpful，please donate via WeChat, thanks
+> If feel helpful，please donate via WeChat, thanks!
 
 ![image](https://github.com/TicooLiu/HowTo-ASR/blob/main/img/donate/weixin.jpeg)
